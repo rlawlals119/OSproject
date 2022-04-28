@@ -1,0 +1,16 @@
+PROCCESSES : 프로세스 수
+TIME : 수행시간(현재시간)
+max_time = 모든 프로세스의 BT를 합한 값 (총 수행시간)
+bt : 입력 받은 Burst Time값
+at : 프로세스 도착 시간값
+BT[] : 인덱스 = 프로세스 번호, 값 = bt
+AT[] : 인덱스 = at, 값 = 프로세스 번호
+current_p = 현재 프로세스 번호
+heap : srtn ready queue
+queue : fcfs, spn ready queue
+
+completed[] : 인덱스 = 프로세스 번호, 값 = 0(수행 미완료), 1(수행 완료)
+WT : waiting_time
+TT : turnaround_time
+normalised_TT : NTT
+hrr = 가장 높은 Response Ratio
