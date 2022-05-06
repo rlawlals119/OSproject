@@ -93,24 +93,23 @@ import heapq
 import numpy as np
 import copy
 
-def hrrn (PROCESSES, TIME, AT, BT, at):
+def hrrn (PROCESSES, TIME, AT, BT):
     Done =  list(np.zeros(PROCESSES + 1))     # 완료 개수
     WT =    list(np.zeros(PROCESSES + 1))     # Waiting time
     TT =    list(np.zeros(PROCESSES + 1))     # Turnaround time
     NTT =   list(np.zeros(PROCESSES + 1))     # Normalized TT
-    PROCESSES = [0]                         # 프로세스
     sum_BT = 0   # Burst Time 합계
     for i in range(1, PROCESSES + 1):       # 프로세스 개수만큼 생성
         #PROCESSES.append(chr(64 + i))      # 프로세스 이름 삽입 (A, B, C, D)
         sum_BT += BT[i]                     # BT 합계
     for i in range(1, PROCESSES + 1):           # AT 정렬
-        for j in range(i + 2, PROCESSES + 1):    # j: 1부터 5까지 ex) (0,1), (0,2)
+        for j in range(i + 1, PROCESSES + 1):    # j: 1부터 5까지 ex) (0,1), (0,2)
             if AT[i] > AT[j]:               # AT의 대소비교
                 AT[i], AT[j] = AT[j], AT[i] # AT가 빠른 프로세스와 바꾼다.
     while(TIME < sum_BT):
         HRR = 0     # High Response Ratio
         NRR = 0     # Now Response Ratio
-        index = 0   # Index 위치
+        index = 1   # Index 위치
         for i in range(1, PROCESSES + 1):
             if AT[i] <= TIME and Done[i] == 0:
                 NRR = (((TIME - AT[i]) + BT[i]) / BT[i])
@@ -120,10 +119,12 @@ def hrrn (PROCESSES, TIME, AT, BT, at):
         TIME += BT[index]                   # 총 실행시간
         TT[index] = TIME - AT[index]        # Turn-Around Time 계산
         WT[index] = (TT[index] - BT[index]) # Waiting Time 계산
-        NTT = (TT[index] / BT[index])       # Normalized TT 계산
+        NTT[index] = (TT[index] / BT[index])       # Normalized TT 계산
         Done[index] = 1       # 완료된 프로세스를 처리
     print("P id| AT | BT | WT | TT")
     for i in range (1, PROCESSES+1):
         print("P{0} | {1} | {2} | {3} | {4}".format(i, AT[i], BT[i], WT[i], TT[i]))
 
-    return WT, TT
+    return WT, TT, NTT
+
+#print(hrrn(5, 0, [0, 0, 1, 3, 5, 6], [0, 3, 7, 2, 5, 3]))
