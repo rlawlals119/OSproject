@@ -4,23 +4,23 @@ import numpy as np
 from time import time, sleep
 from queue import Queue
 
-PROCCESSES = int(input("프로세스 수를 입력하시오. : ")) # 사용되는 프로세스 수 입력
-PROCCESSORS = 1
+PROCESSES = int(input("프로세스 수를 입력하시오. : ")) # 사용되는 프로세스 수 입력
+PROCESSORS = 1
 TIME = 0        # 프로그램 전체 수행 시간
 T_QUANTUM = 3
 max_time = 20    # 모든 BT를 합한 값, 모든 프로세스의 총 수행 시간
 bt = 0
 at = 0      # 입력받은 BT, AT 값
+TT = list(np.zeros(PROCESSES+1))
+WT = list(np.zeros(PROCESSES+1))
 
 AT = [1, 2, 0, 3, 0, 4, 5]
 BT = [0, 3, 7, 2, 5, 3]
-TT = list(np.zeros(PROCCESSES+1))
-WT = list(np.zeros(PROCCESSES+1))
-# TT = 수행완료시간 - AT
-# WT = TT - BT
-#BT = list(np.zeros(PROCCESSES+1))                   # (0위치 비움)0으로 채워진 프로세스 수만큼의 크기를 가진 리스트
+
+
+#BT = list(np.zeros(PROCESSES+1))                   # (0위치 비움)0으로 채워진 프로세스 수만큼의 크기를 가진 리스트
 #
-#for i in range(0, PROCCESSES):
+#for i in range(0, PROCESSES):
 #    bt = int(input("P{0}의 BT : ".format(i+1)))     # bt 입력
 #    BT[i+1] = bt                                    # 인덱스를 프로세스 번호라고 생각하고 각 프로세스의 bt값 넣음
 #    max_time += bt                                  # 모든 프로세스의 총 수행시간
@@ -29,7 +29,7 @@ tmp = BT.copy()
 
 #AT = list(np.zeros(max_time))                       # 0으로 채워진 총 수행시간 크기의 리스트
 #
-#for i in range(0, PROCCESSES):
+#for i in range(0, PROCESSES):
 #    at = int(input("P{0}의 AT : ".format(i+1)))     # at 입력
 #    AT[at] = i+1                                    # 인덱스는 도착한 시간 넣어진 값은 프로세스의 번호
 
@@ -55,8 +55,8 @@ while (TIME < max_time):
 
         if tmp[current_p] == 0:  # 수행완료된 경우
             print("P{0}의 TT : {1}".format(current_p, TIME))    # 프로세스 실행 시간
-            TT[current_p] = TIME - AT.index(current_p)
-            WT[current_p] = TT[current_p] - BT[current_p]
+            TT[current_p] = TIME - AT.index(current_p)          # TT = 수행완료시간 - AT
+            WT[current_p] = TT[current_p] - BT[current_p]       # WT = TT - BT
             current_p = 0           # 현재 프로세스 비워줌
             rr_t = T_QUANTUM
 
@@ -66,7 +66,7 @@ while (TIME < max_time):
             rr_t = T_QUANTUM
 
 print("P id| AT | BT | WT | TT")
-for i in range (1, PROCCESSES+1):
+for i in range (1, PROCESSES+1):
     print("P{0} | {1} | {2} | {3} | {4}".format(i, AT.index(i), BT[i], WT[i], TT[i]))
 end = time()
 
