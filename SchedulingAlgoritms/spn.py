@@ -9,10 +9,11 @@ import numpy as np
 #TIME = 0        # 프로그램 전체 수행 시간
 #max_time = 20    # 모든 BT를 합한 값, 모든 프로세스의 총 수행 시간
 #bt = 0
-#at = 0      # 입력받은 BT, AT 값
+#at = 6      # 입력받은 BT, AT 값
 #TT = list(np.zeros(PROCESSES+1))
 #WT = list(np.zeros(PROCESSES+1))
-#
+#AT = [1, 2, 0, 3, 0, 4, 5]
+#BT = [0, 3, 7, 2, 5, 3]
 #BT = list(np.zeros(PROCESSES+1))                   # (0위치 비움)0으로 채워진 프로세스 수만큼의 크기를 가진 리스트
 ##
 ##for i in range(0, PROCESSES):
@@ -33,6 +34,8 @@ def spn (PROCESSES, TIME, AT, BT, at):
     tmp = BT.copy()
     TT = list(np.zeros(PROCESSES+1))
     WT = list(np.zeros(PROCESSES+1))
+    print(AT)
+    print(BT)
     while (TIME < 20):
         if(TIME <= at and AT[TIME] != 0) : heapq.heappush(heap, tmp[AT[TIME]])
         TIME += 1
@@ -46,8 +49,11 @@ def spn (PROCESSES, TIME, AT, BT, at):
                 TT[current_p] = TIME - AT.index(current_p)          # TT = 수행완료시간 - AT
                 WT[current_p] = TT[current_p] - BT[current_p]       # WT = TT - BT
                 current_p = 0       # 현재 프로세스 비워줌
-    print("P id| AT | BT | WT | TT")
-    for i in range (1, PROCESSES+1):
-        print("P{0} | {1} | {2} | {3} | {4}".format(i, AT.index(i), BT[i], WT[i], TT[i]))
-    
+#    print("P id| AT | BT | WT | TT")
+#    for i in range (1, PROCESSES+1):
+#        print("P{0} | {1} | {2} | {3} | {4}".format(i, AT.index(i), BT[i], WT[i], TT[i]))
+
     return WT, TT
+#, TT = spn(PROCESSES, 0, AT, BT, at)
+#int(WT)
+#int(TT)
