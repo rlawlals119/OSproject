@@ -170,16 +170,6 @@
     <string>Execution Speed</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="Core_lineEdit">
-   <property name="geometry">
-    <rect>
-     <x>680</x>
-     <y>130</y>
-     <width>91</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="ExecutionSpeed_lineEdit">
    <property name="geometry">
     <rect>
@@ -575,6 +565,19 @@
    </property>
    <property name="text">
     <string>P</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="core_label">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>130</y>
+     <width>64</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>E</string>
    </property>
   </widget>
  </widget>

@@ -15,6 +15,7 @@ class WindowClass(QMainWindow, form_class):
         self.PROCESSES = 0
         self.T_QUANTUM = 0
         self.PRIORITY = list(np.zeros(15))
+        self.CORE = 0
         self.at = 0
         self.bt = 0
         self.AT = list(np.zeros(20))
@@ -29,6 +30,8 @@ class WindowClass(QMainWindow, form_class):
         self.start_pushButton.clicked.connect(self.startBtn)
         self.Add_pushButton.clicked.connect(self.addBtn)
         self.Reset_pushButton.clicked.connect(self.resetBtn)
+        self.ecore_pushButton.clicked.connect(self.ecoreBtn)
+        self.pcore_pushButton.clicked.connect(self.pcoreBtn)
 
     def startBtn(self):
         self.PROCESSES = self.name
@@ -85,6 +88,13 @@ class WindowClass(QMainWindow, form_class):
     def resetBtn(self):
         self.TimeTable_tableWidget.clear()
         self.ResultTable_tableWidget.clear()
+
+    def ecoreBtn(self):
+        self.core_label.setText("E")
+        self.CORE = "E"
+    def pcoreBtn(self):
+        self.core_label.setText("P")
+        self.CORE = "P"
 
     def GanttChart(self, TIME, current_p):
         self.Ganttchart_tableWidget.setColumnCount(TIME)
