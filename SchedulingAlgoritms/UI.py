@@ -337,6 +337,7 @@ class Ui_Dialog(object):
         self.AlgorithomList_comboBox.setItemText(2, _translate("Dialog", "SPN"))
         self.AlgorithomList_comboBox.setItemText(3, _translate("Dialog", "SRTN"))
         self.AlgorithomList_comboBox.setItemText(4, _translate("Dialog", "HRRN"))
+        self.AlgorithomList_comboBox.setItemText(5, _translate("Dialog", "TPFN"))
 
 
 if __name__ == "__main__":
