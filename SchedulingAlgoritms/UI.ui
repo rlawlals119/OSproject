@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>932</width>
-    <height>945</height>
+    <height>815</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -144,7 +144,7 @@
     <string>Reset</string>
    </property>
   </widget>
-  <widget class="QLabel" name="ProcessorNumber_label">
+  <widget class="QLabel" name="Core_label">
    <property name="geometry">
     <rect>
      <x>640</x>
@@ -154,7 +154,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Processor Number</string>
+    <string>Core:</string>
    </property>
   </widget>
   <widget class="QLabel" name="ExecutionSpeed_label">
@@ -170,10 +170,10 @@
     <string>Execution Speed</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="ProcessorNumber_lineEdit">
+  <widget class="QLineEdit" name="Core_lineEdit">
    <property name="geometry">
     <rect>
-     <x>780</x>
+     <x>680</x>
      <y>130</y>
      <width>91</width>
      <height>21</height>
@@ -365,24 +365,11 @@
     </property>
    </column>
   </widget>
-  <widget class="QLabel" name="ReadQueue_label">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>360</y>
-     <width>101</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt;Read Queue&gt;</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="ganttChart_label">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>500</y>
+     <y>360</y>
      <width>151</width>
      <height>16</height>
     </rect>
@@ -395,9 +382,9 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>520</y>
+     <y>390</y>
      <width>871</width>
-     <height>131</height>
+     <height>111</height>
     </rect>
    </property>
   </widget>
@@ -405,7 +392,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>660</y>
+     <y>520</y>
      <width>121</width>
      <height>16</height>
     </rect>
@@ -418,7 +405,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>680</y>
+     <y>550</y>
      <width>871</width>
      <height>241</height>
     </rect>
@@ -524,71 +511,6 @@
     </property>
    </column>
   </widget>
-  <widget class="QTableWidget" name="ReadQueue_tableWidget">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>380</y>
-     <width>871</width>
-     <height>111</height>
-    </rect>
-   </property>
-   <row>
-    <property name="text">
-     <string>Queue</string>
-    </property>
-   </row>
-   <column>
-    <property name="text">
-     <string>1</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>2</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>3</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>4</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>5</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>6</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>7</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>8</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>9</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>10</string>
-    </property>
-   </column>
-  </widget>
   <widget class="QComboBox" name="AlgorithomList_comboBox">
    <property name="geometry">
     <rect>
@@ -628,6 +550,32 @@
      <string>TPFS</string>
     </property>
    </item>
+  </widget>
+  <widget class="QPushButton" name="ecore_pushButton">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>130</y>
+     <width>41</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>E</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pcore_pushButton">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>130</y>
+     <width>41</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>P</string>
+   </property>
   </widget>
  </widget>
  <resources/>
