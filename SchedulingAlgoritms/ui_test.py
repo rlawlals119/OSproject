@@ -89,7 +89,7 @@ class WindowClass(QMainWindow, form_class):
     def GanttChart(self, TIME, current_p):
         self.Ganttchart_tableWidget.setColumnCount(TIME)
         self.Ganttchart_tableWidget.setRowCount(1)
-        self.Ganttchart_tableWidget.setItem(0, TIME, str(current_p))
+        self.Ganttchart_tableWidget.setItem(0, TIME-1, QTableWidgetItem("Process:"+str(current_p)))
 
 
     def fcfs_ui(self, PROCESSES, TIME, AT, BT, at):
@@ -103,9 +103,9 @@ class WindowClass(QMainWindow, form_class):
             TIME += 1
             if current_p == 0:          # 프로세서 할당 가능
                 current_p = tmp.index(queue.pop(0)) # 현재 프로세서에 queue 원소 하나 넣음
-                #self.GanttChart(TIME, current_p)
                 print("proccess : ", current_p)        # 현재 프로세서 넘버 출력
             if current_p != 0:
+                self.GanttChart(TIME, current_p)
                 tmp[current_p] -= 1      # 현재 프로세스의 남은 수행 시간
                 if tmp[current_p] == 0 : # 현재 프로세스 수행 완료 시
                     print("P{0}의 TT : {1}".format(current_p, TIME))    # 프로세스 실행 시간
@@ -132,7 +132,7 @@ class WindowClass(QMainWindow, form_class):
             if current_p != 0:          # 프로세서 할당된 상태
                 tmp[current_p] -= 1
                 rr_t -= 1
-
+                self.GanttChart(TIME, current_p)
                 if tmp[current_p] == 0:  # 수행완료된 경우
                     print("P{0}의 TT : {1}".format(current_p, TIME))    # 프로세스 실행 시간
                     TT[current_p] = TIME - AT.index(current_p)          # TT = 수행완료시간 - AT
@@ -163,6 +163,7 @@ class WindowClass(QMainWindow, form_class):
                 current_p = tmp.index(heapq.heappop(heap)) # 현재 프로세서에 heap에서 가장 작은 원소 넣음
                 print("proccess : ", current_p)        # 현재 프로세서 넘버 출력
             if current_p != 0:
+                self.GanttChart(TIME, current_p)
                 tmp[current_p] -= 1      # 현재 프로세스의 남은 수행 시간
                 if tmp[current_p] == 0 : # 현재 프로세스 수행 완료 시
                     print("P{0}의 TT : {1}".format(current_p, TIME))    # 프로세스 실행 시간
@@ -184,6 +185,7 @@ class WindowClass(QMainWindow, form_class):
             current_p = tmp.index(heapq.heappop(heap)) # 현재 프로세서에 heap에서 가장 작은 원소 넣음
             print("proccess : ", current_p)        # 현재 프로세서 넘버 출력
             if current_p != 0:
+                self.GanttChart(TIME, current_p)
                 tmp[current_p] -= 1      # 현재 프로세스의 남은 수행 시간
                 heapq.heappush(heap, tmp[current_p])
                 if tmp[current_p] == 0 : # 현재 프로세스 수행 완료 시
@@ -206,7 +208,6 @@ class WindowClass(QMainWindow, form_class):
 
         while(TIME < sum_BT):
             HRR = 0     # High Response Ratio
-            NRR = 0     # Now Response Ratio
             index = 1   # Index 위치
             for i in range(1, PROCESSES + 1):
                 if AT[i] <= TIME and Done[i] == 0:
@@ -214,11 +215,14 @@ class WindowClass(QMainWindow, form_class):
                     if HRR < NRR:  # 가장 높은 Response Ratio 확인
                         HRR = NRR  # Response Ratio 저장 
                         index = i  # 프로세스 인덱스 위치
-            TIME += BT[index]                   # 총 실행시간
+            for n in range(BT[index]):
+                TIME += 1
+                self.GanttChart(TIME, index)
+#            TIME += BT[index]                   # 총 실행시간
             TT[index] = TIME - AT[index]        # Turn-Around Time 계산
             WT[index] = (TT[index] - BT[index]) # Waiting Time 계산
-            NTT[index] = (TT[index] / BT[index])       # Normalized TT 계산
             Done[index] = 1       # 완료된 프로세스를 처리
+            self.GanttChart(TIME, index)
 
         return WT, TT
 
@@ -241,6 +245,7 @@ class WindowClass(QMainWindow, form_class):
             for i in range(1, PROCESSES + 1):           # 각각의 프로세스에 대해서
                 if BANK[i] == 1 and completed[i] == 0 and TIER[i] > tmp:  # 실행 가능하고 TIER가 가장 높으면 
                     Flag = i                        # 해당 인덱스를 저장하고
+                    self.GanttChart(TIME, i)
                     tmp = TIER[i]                   # TIER를 저장한다.
             BT_R[Flag] -= 1     # BT 1감소
             TIME += 1           # 시간 1 카운트
